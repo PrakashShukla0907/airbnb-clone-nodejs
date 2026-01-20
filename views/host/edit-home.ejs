@@ -1,0 +1,128 @@
+<%- include('../partials/head') %>
+  <body class="pt-20">
+    <%- include('../partials/nav') %>
+    <main class="container mx-auto px-4 py-8">
+      <div class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">
+              <i class="fas fa-<%= editing ? 'edit' : 'plus' %> mr-3 text-red-500"></i>
+              <%= editing ? "Edit" : "Add New" %> Home
+            </h1>
+            <p class="text-gray-600"><%= editing ? "Update your home details" : "List your property on Airbnb" %></p>
+          </div>
+
+          <form action="/host/<%= editing ? 'edit-home' : 'add-home' %>" method="POST" class="space-y-6">
+            <input type="hidden" value="<%= editing ? home._id : '' %>" name="_id">
+
+            <div>
+              <label for="houseName" class="block text-sm font-medium text-gray-700 mb-2">Home Name</label>
+              <div class="relative">
+                <input
+                  type="text"
+                  id="houseName"
+                  name="houseName"
+                  value="<%= editing ? home.houseName : '' %>"
+                  placeholder="Enter your home name"
+                  required
+                  class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200"
+                />
+                <i class="fas fa-home absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+              </div>
+            </div>
+
+            <div>
+              <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Price per Night</label>
+              <div class="relative">
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  value="<%= editing ? home.price : '' %>"
+                  placeholder="Enter price"
+                  required
+                  min="1"
+                  class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200"
+                />
+                <i class="fas fa-rupee-sign absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+              </div>
+            </div>
+
+            <div>
+              <label for="location" class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+              <div class="relative">
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  value="<%= editing ? home.location : '' %>"
+                  placeholder="Enter location"
+                  required
+                  class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200"
+                />
+                <i class="fas fa-map-marker-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+              </div>
+            </div>
+
+            <div>
+              <label for="rating" class="block text-sm font-medium text-gray-700 mb-2">Rating (1-5)</label>
+              <div class="relative">
+                <input
+                  type="number"
+                  id="rating"
+                  name="rating"
+                  value="<%= editing ? home.rating : '' %>"
+                  placeholder="Enter rating"
+                  required
+                  min="1"
+                  max="5"
+                  step="0.1"
+                  class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200"
+                />
+                <i class="fas fa-star absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+              </div>
+            </div>
+
+            <div>
+              <label for="photoUrl" class="block text-sm font-medium text-gray-700 mb-2">Photo URL</label>
+              <div class="relative">
+                <input
+                  type="url"
+                  id="photoUrl"
+                  name="photoUrl"
+                  value="<%= editing ? home.photoUrl : '' %>"
+                  placeholder="Enter photo URL"
+                  required
+                  class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200"
+                />
+                <i class="fas fa-image absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+              </div>
+            </div>
+
+            <div>
+              <label for="discription" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+              <textarea
+                id="discription"
+                name="discription"
+                rows="4"
+                placeholder="Describe your home..."
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-200 resize-none"
+              ><%= editing ? home.discription : '' %></textarea>
+            </div>
+
+            <div class="flex gap-4 pt-4">
+              <button type="submit" class="flex-1 bg-red-500 text-white py-3 px-6 rounded-lg hover:bg-red-600 transition-colors duration-200 font-medium">
+                <i class="fas fa-save mr-2"></i><%= editing ? "Update" : "Add" %> Home
+              </button>
+              <a href="/host/host-home-list" class="bg-gray-200 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors duration-200 font-medium">
+                <i class="fas fa-times mr-2"></i>Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    </main>
+  </body>
+</html>

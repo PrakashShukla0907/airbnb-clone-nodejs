@@ -1,0 +1,79 @@
+<header class="fixed top-0 w-full bg-red-500/95 backdrop-blur-xl text-white shadow-md z-50">
+  <nav class="container mx-auto flex justify-between items-center h-5 md:h-8 px-4">
+    
+    <div class="flex items-center">
+      <a href="/" class="text-2xl font-bold tracking-tighter">airbnb</a>
+    </div>
+
+    <input type="checkbox" id="menu-toggle" class="hidden peer" />
+
+    <label for="menu-toggle" class="md:hidden cursor-pointer text-2xl z-20 select-none p-2">
+      <span class="block peer-checked:hidden">☰</span>
+      <span class="hidden peer-checked:block">✕</span>
+    </label>
+
+    <ul class="
+      /* Mobile Menu Defaults */
+      hidden absolute top-full left-0 w-full flex-col bg-red-500 p-6 space-y-3 shadow-xl
+      transition-all duration-300 ease-in-out transform -translate-y-4 opacity-0
+      /* Trigger */
+      peer-checked:flex peer-checked:translate-y-0 peer-checked:opacity-100
+      /* Desktop Reset: Added md:space-y-0 and items-center for better alignment */
+      md:flex md:flex-row md:relative md:top-auto md:left-auto md:w-auto md:bg-transparent md:shadow-none 
+      md:p-0 md:space-x-1 md:items-center md:opacity-100 md:translate-y-0
+    ">
+      
+      <% if(isLoggedIn) { %> 
+        <% if(accountType === "guest") { %>
+          <li>
+            <a href="/homes" class="<%= currentPage === 'Home' ? 'bg-red-700' : 'hover:bg-red-600' %> block py-2.5 px-5 rounded-lg transition duration-300">
+              <i class="fas fa-list mr-2"></i>Homes
+            </a>
+          </li>
+          <li>
+            <a href="/favourites" class="<%= currentPage === 'favourites' ? 'bg-red-700' : 'hover:bg-red-600' %> block py-2.5 px-5 rounded-lg transition duration-300">
+              <i class="fas fa-heart mr-2"></i>Favourites
+            </a>
+          </li>
+          <li>
+            <a href="/bookings" class="<%= currentPage === 'bookings' ? 'bg-red-700' : 'hover:bg-red-600' %> block py-2.5 px-5 rounded-lg transition duration-300">
+              <i class="fas fa-calendar mr-2"></i>Bookings
+            </a>
+          </li>
+        <% } else if(accountType === "host") { %>
+          <li>
+            <a href="/host/host-home-list" class="<%= currentPage === 'host-homes' ? 'bg-red-700' : 'hover:bg-red-600' %> block py-2.5 px-5 rounded-lg transition duration-300">
+              <i class="fas fa-building mr-2"></i>My Homes
+            </a>
+          </li>
+          <li>
+            <a href="/host/add-home" class="<%= currentPage === 'addHome' ? 'bg-red-700' : 'hover:bg-red-600' %> block py-2.5 px-5 rounded-lg transition duration-300">
+              <i class="fas fa-plus mr-2"></i>Add Home
+            </a>
+          </li>
+        <% } %> 
+      <% } else { %>
+        <li>
+          <a href="/auth/signup" class="<%= currentPage === 'signup' ? 'bg-red-700' : 'hover:bg-red-600' %> block py-2.5 px-5 rounded-lg transition duration-300">
+            <i class="fas fa-user-plus mr-2"></i>Signup
+          </a>
+        </li>
+        <li>
+          <a href="/auth/login" class="<%= currentPage === 'login' ? 'bg-red-700' : 'hover:bg-red-600' %> block py-2.5 px-5 rounded-lg transition duration-300">
+            <i class="fas fa-sign-in-alt mr-2"></i>Login
+          </a>
+        </li>
+      <% } %>
+
+      <% if(isLoggedIn) { %>
+      <li class="border-t border-red-400/50 md:border-none pt-4 md:pt-0 md:ml-2">
+        <form action="/auth/logout" method="post">
+          <button type="submit" class="w-full text-left bg-red-800 md:bg-red-700 hover:bg-black px-5 py-2.5 rounded-lg transition font-medium">
+            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+          </button>
+        </form>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+</header>
